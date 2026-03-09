@@ -34,7 +34,7 @@ func NewUserHandler(router *gin.RouterGroup, services domain.UserServices) {
 
 func (h *UserHandler) Register(ctx *gin.Context) {
 	var req domain.RegisterRequest
-	if err := ctx.ShouldBindJSON(req); err != nil {
+	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

@@ -12,8 +12,8 @@ type mySqlRepository struct {
 	DB *sql.DB
 }
 
-func NewMySQLRepository(db *sql.DB) mySqlRepository {
-	return mySqlRepository{DB: db}
+func NewMySQLRepository(db *sql.DB) *mySqlRepository {
+	return &mySqlRepository{DB: db}
 }
 
 func (r *mySqlRepository) AddUser(ctx context.Context, user *domain.User) error {
@@ -32,9 +32,9 @@ func (r *mySqlRepository) AddUser(ctx context.Context, user *domain.User) error 
 	return nil
 }
 
-func (r *mySqlRepository) FindByPhone(phone string) (*domain.User, error) {
-	query := "SELECT id, full_name, phone, password, role, is_active, created_at, updated_at WHERE phone = ?"
-	row := r.DB.QueryRow(query, phone)
+func (r *mySqlRepository) FindByPhone(ctx context.Context, phone string) (*domain.User, error) {
+	query := "SELECT id, full_name, phone, password, role, is_active, created_at, updated_at FROM user WHERE phone = ?"
+	row := r.DB.QueryRowContext(ctx, query, phone)
 
 	var user domain.User
 	

@@ -51,8 +51,7 @@ func (s *userServices) Login(ctx context.Context, input domain.LoginRequest) (st
 		return "", errors.New("invalid phone number or password")
 	}
 
-	var user domain.User
-	token, err := jwt.GenerateToken(user.ID, input.Phone)
+	token, err := jwt.GenerateToken(data.ID, input.Phone)
 	if err != nil {
 		return "", err
 	}

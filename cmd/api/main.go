@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"time"
 
+	// "github.com/Hdeee1/be-go-restaurant-management/internal/delivery/handler"
 	"github.com/Hdeee1/be-go-restaurant-management/internal/repository/mysql"
 	"github.com/Hdeee1/be-go-restaurant-management/internal/services"
 	"github.com/Hdeee1/be-go-restaurant-management/pkg/database"
+	// "github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
 
@@ -21,5 +23,6 @@ func main() {
 	}
 
 	repo := mysql.NewMySQLRepository(db)
-	services.NewUserServices(repo, 1 * time.Hour)
+	_ = services.NewUserServices(repo, 5 * time.Minute)
+	// handler := handler.NewUserHandler()
 }
